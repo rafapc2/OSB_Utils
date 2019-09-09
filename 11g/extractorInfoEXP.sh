@@ -23,31 +23,42 @@
 echo "******************* INICIO *******************"
 echo "**********************************************"
 
-# ejemplo de salida del archivo exp.txt TODO:
+# ejemplo de salida del archivo f1_exposiciones.csv TODO:
 
+fileExp=f1_exposiciones.csv
+rm $fileExp
 
 echo "procesando proxy EXP ...."
-find . -name '*.proxy' -exec grep -iH '<env:value>' {} \; > exp.txt
+find . -iname '*EXP*.proxy' -exec grep -iH '<env:value>' {} \; > $fileExp
 
 #se inicia proceso para limpiar archivo y  eliminar valores
 
 echo "se elimina \"./\" inicial"
-sed -i 's/\.\///g' exp.txt
+gsed -i 's/\.\///g' $fileExp
 
-echo "se elimina \":      <env:value> \" y se reemplaza por \"=\""
-sed -i 's/\:      /\=/g' exp.txt
+echo "se elimina \":      <env:value> \" y se reemplaza por \";\""
+gsed -i 's/\:      /\;/g' $fileExp
 
 
 echo "Se elimina \"<env:value>\"  y \"</env:value>\""
-sed -i -r 's/<[^>]+>//g' exp.txt
+gsed -i -r 's/<[^>]+>//g' $fileExp
 
 echo "se reemplaza un espacio por \"__\" para el caso de los path con espacio."
-sed -i 's/ /__/g' exp.txt
+gsed -i 's/ /__/g' $fileExp
 echo ""
 echo ""
-read -p "Presiona cualquier una tecla para continuar con el proceso de filtrado segun transport provider..."
+#read -p "Presiona cualquier tecla para finalizar con el proceso de filtrado "
+nombreDominio=${PWD##*/}  
+gsed -i "s|^|${nombreDominio};|g" $fileExp
 
-#cat exp.txt
+#agregar ultima columna
+gsed 's/$/\;sin Informacion;/' $fileExp
+
+
+echo ""
+echo ""
+
+wc -l $fileExp 
 
 echo ""
 echo ""
