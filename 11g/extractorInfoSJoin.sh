@@ -33,7 +33,7 @@ find . -iname '*.flow' -not -path "*.metadata*" -exec grep -iH 'isProxy' {} \; >
 #se inicia proceso para limpiar archivo y  eliminar valores
 
 echo "se elimina \"./\" inicial"
-gsed -i 's/\.\///g' $fileName
+sed -i 's/\.\///g' $fileName
 
 #verificando si hay estructuras multilinea, los Split Join tienden a no ser estandar
 
@@ -55,30 +55,30 @@ echo ""
 echo "$countErr linea(s) de WARNING por posible informacion faltante --> EDITE el(los) archivos y corrija manualmente"
 echo "$countOK linea(s) correctas"
 #eliminando texto </bpel:invoke></bpel:sequence>
-gsed -i 's/<rescon:service //g' $fileName
-gsed -i 's/isProxy\=\"true\"//g' $fileName
+sed -i 's/<rescon:service //g' $fileName
+sed -i 's/isProxy\=\"true\"//g' $fileName
 
 #eliminando texto </rescon:service> </rescon:invokeInfo> y </bpel:invoke> y </bpel:sequence>
-gsed -i 's/<\/rescon:service>//g' $fileName
-gsed -i 's/<\/rescon:invokeInfo>//g' $fileName
-gsed -i 's/<\/bpel:invoke>//g' $fileName
-gsed -i 's/<\/bpel:sequence>//g' $fileName
+sed -i 's/<\/rescon:service>//g' $fileName
+sed -i 's/<\/rescon:invokeInfo>//g' $fileName
+sed -i 's/<\/bpel:invoke>//g' $fileName
+sed -i 's/<\/bpel:sequence>//g' $fileName
 
 
 #grupo de textos, tab y espacios
-gsed -i 's/.flow/.flow;/g' $fileName
-gsed -i  's/\/>//g' $fileName
-gsed -i -r 's/[:\">]//g' $fileName
-gsed -i  's/\t//g' $fileName
-gsed -i 's/ //g' $fileName
-gsed -i 's/ref\=//g' $fileName
+sed -i 's/.flow/.flow;/g' $fileName
+sed -i  's/\/>//g' $fileName
+sed -i -r 's/[:\">]//g' $fileName
+sed -i  's/\t//g' $fileName
+sed -i 's/ //g' $fileName
+sed -i 's/ref\=//g' $fileName
 
-gsed -i  's/$/.proxy/g' $fileName
+sed -i  's/$/.proxy/g' $fileName
 
 echo ""
 #read -p "Presiona cualquier tecla para finalizar con el proceso de filtrado "
 nombreDominio=${PWD##*/}  
-gsed -i "s|^|${nombreDominio};|g" $fileName
+sed -i "s|^|${nombreDominio};|g" $fileName
 
 echo ""
 echo ""

@@ -19,7 +19,7 @@
 #   along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 
-script_files=( "./extractorInfoEXP.sh" "./extractorInfoSJoin.sh"   "./extractorInfoBusiness.sh"  "./extractorInfoEXP2COMP.sh" )
+script_files=( "extractorInfoEXP.sh" "extractorInfoSJoin.sh"   "extractorInfoBusiness.sh"  "extractorInfoEXP2COMP.sh" )
 
 echo "Iniciando Lectura del archivo:"
 

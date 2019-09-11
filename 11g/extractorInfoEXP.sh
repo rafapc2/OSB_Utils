@@ -34,25 +34,25 @@ find . -iname '*EXP*.proxy' -exec grep -iH '<env:value>' {} \; > $fileExp
 #se inicia proceso para limpiar archivo y  eliminar valores
 
 echo "se elimina \"./\" inicial"
-gsed -i 's/\.\///g' $fileExp
+sed -i 's/\.\///g' $fileExp
 
 echo "se elimina \":      <env:value> \" y se reemplaza por \";\""
-gsed -i 's/\:      /\;/g' $fileExp
+sed -i 's/\:      /\;/g' $fileExp
 
 
 echo "Se elimina \"<env:value>\"  y \"</env:value>\""
-gsed -i -r 's/<[^>]+>//g' $fileExp
+sed -i -r 's/<[^>]+>//g' $fileExp
 
 echo "se reemplaza un espacio por \"__\" para el caso de los path con espacio."
-gsed -i 's/ /__/g' $fileExp
+sed -i 's/ /__/g' $fileExp
 echo ""
 echo ""
 #read -p "Presiona cualquier tecla para finalizar con el proceso de filtrado "
 nombreDominio=${PWD##*/}  
-gsed -i "s|^|${nombreDominio};|g" $fileExp
+sed -i "s|^|${nombreDominio};|g" $fileExp
 
 #agregar ultima columna
-gsed 's/$/\;sin Informacion;/' $fileExp
+sed 's/$/\;sin Informacion;/' $fileExp
 
 
 echo ""

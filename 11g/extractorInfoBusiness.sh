@@ -33,20 +33,20 @@ find . -name '*.biz' -exec grep -iH '<env:value>' {} \; > f0_endpoints.csv
 #se inicia proceso para limpiar archivo y  eliminar valores
 
 echo "se elimina \"./\" inicial"
-gsed -i 's/\.\///g' f0_endpoints.csv
+sed -i 's/\.\///g' f0_endpoints.csv
 
 echo "se elimina \":      <env:value> \" y se reemplaza por \"=\""
-gsed -i 's/\:      /\;/g' f0_endpoints.csv
+sed -i 's/\:      /\;/g' f0_endpoints.csv
 
 
 echo "Se elimina \"<env:value>\"  y \"</env:value>\""
-gsed -i -r 's/<[^>]+>//g' f0_endpoints.csv
+sed -i -r 's/<[^>]+>//g' f0_endpoints.csv
 
 echo "se reemplaza un espacio por \"__\" para el caso de los path con espacio."
-gsed -i 's/ /__/g' f0_endpoints.csv
+sed -i 's/ /__/g' f0_endpoints.csv
 
 nombreDominio=${PWD##*/}  
-gsed -i "s|^|${nombreDominio};|g" f0_endpoints.csv
+sed -i "s|^|${nombreDominio};|g" f0_endpoints.csv
 echo ""
 
 wc -l f0_endpoints.csv
