@@ -8,4 +8,4 @@ RUN chmod +x *.sh
 
 #VOLUME /data11g/mnt
 # docker build -t "osb11gutil:1.0" .
-# docker run -it -v /Users/rprudencio/analisis/osbbancocoLocal:/data11g/mnt osb11gutil:1.0 /bin/bash
+# docker run -it -v /Users/rprudencio/analisis/osbbancocoLocal:/data11g/osbbancocoLocal osb11gutil:1.0 /bin/bash
