@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # version: 0.1.1
 # Objetivo: Permite tomar los proyectos OSB,  analizar los business, catalogar y separar los endpoint segun tipo
 # v 0.1.0: 23/05/2018 Version inicial
