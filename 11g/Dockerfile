@@ -1,4 +1,8 @@
 FROM alpine:3.10
+LABEL \
+    maintainer="rafapc2@gmail.com" \
+    version="1.0" \
+    name="osb11gutil"
 RUN echo 'export PATH="$PATH:/data11g"' >> ~/.bashrc && source ~/.bashrc
 RUN apk add --no-cache bash
 RUN mkdir /data11g
