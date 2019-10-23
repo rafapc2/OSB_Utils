@@ -44,20 +44,20 @@ function fnBuscarPorPatronesConocidos(){
 function fnLimpiarValores(){
 
     echo "Procesando Archivo $1 para eliminar informacion innecesaria"
-    sed -i 's/\.\///g' $1
-    sed -i 's/proxy\:.*</proxy\;</g' $1
-    sed -i 's/proxy\;.* ref\=/proxy\;/g' $1
-    sed -i 's/xmlns\:ref\=\"http\:\/\/www\.bea\.com\/wli\/sb\/reference\"\/>//g'  $1
-    sed -i 's/xsi\:type\=\"ref\:ProxyRef\"//g' $1
+    gsed -i 's/\.\///g' $1
+    gsed -i 's/proxy\:.*</proxy\;</g' $1
+    gsed -i 's/proxy\;.* ref\=/proxy\;/g' $1
+    gsed -i 's/xmlns\:ref\=\"http\:\/\/www\.bea\.com\/wli\/sb\/reference\"\/>//g'  $1
+    gsed -i 's/xsi\:type\=\"ref\:ProxyRef\"//g' $1
 
     #caso especial de comp a impl
-    sed -i 's/ xsi\:type\=\"ref\:BusinessServiceRef\"//g' $1
+    gsed -i 's/ xsi\:type\=\"ref\:BusinessServiceRef\"//g' $1
     # fin caso especial
 
-    sed -i 's/ /__/g' $1
+    gsed -i 's/ /__/g' $1
     #eliminando caracteres al final de la linea
-    sed -i 's/_*$//' $1
-    sed -i 's/\"//g' $1
+    gsed -i 's/_*$//' $1
+    gsed -i 's/\"//g' $1
     echo "Total Registros en archivo:"
     wc -l $1
 }
@@ -115,7 +115,6 @@ function fnBuscarRegistrarReferencias(){
 
 }
 
-
 #EXP 2 COMP e IMPL
 
 #Paso 1 se inicia proceso para buscar en archivos origen 
@@ -125,7 +124,6 @@ function fnBuscarRegistrarReferencias(){
     fnLimpiarValores "tmp_refereciasDeEXP.txt"
 #Paso 2 se inicia proceso Buscar referencias y generar archivo csv que contine referencias de EXP a COMP/IMPL
     fnBuscarRegistrarReferencias
-
 
 #COMP 2 IMPL
 echo ""
@@ -269,7 +267,7 @@ cp f4_final.csv f5_final.csv
 while IFS=";" read -r mdwDominio bizImpl urlImpl
 do
     #echo "$bizImpl"
-    sed  -i "s|${bizImpl}|${bizImpl};${urlImpl}|" f5_final.csv
+    gsed  -i "s|${bizImpl}|${bizImpl};${urlImpl}|" f5_final.csv
 done < f0_endpoints.csv
 
 #clean tmp files 
